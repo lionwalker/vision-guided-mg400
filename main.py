@@ -40,8 +40,8 @@ def run_main():
     # cam = Camera(1)
     # print("Taking photo...")
     # Call the method and store the returned image
-    # image = cam.get_frame()
-    image_path = os.path.join(OUTPUT_DIR, "camera_detection.jpg")
+    # cam.get_frame()
+    image_path = os.path.join(OUTPUT_DIR, "camera_detection.png")
     image = cv2.imread(image_path)
     if image is None:
         print(f"Error: {image_path} not found.")
@@ -87,7 +87,10 @@ def run_main():
     if args.mode == "execute" and targets_for_robot:
         bot = MG400Controller()
         for x, y in targets_for_robot:
+            if ((x > 425 or x < 250) and (y > 125 or y < -150)):
+                continue
             bot.pick_and_place(x, y)
+        bot.disconnect()
     elif args.mode == "execute":
         print("Execution skipped: No targets found.")
 

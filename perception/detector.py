@@ -23,7 +23,7 @@ class ObjectDetector:
             mask = cv2.inRange(hsv, np.array(lower), np.array(upper))
         else:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-            _, mask = cv2.threshold(gray, 127, 255, cv2.THRESH_BINARY_INV)
+            _, mask = cv2.threshold(gray, 110, 255, cv2.THRESH_BINARY_INV)
 
         # 3. Morphology (Cleaning the mask)
         kernel = np.ones((5, 5), np.uint8)
@@ -36,7 +36,7 @@ class ObjectDetector:
         results = []
         for cnt in contours:
             area = cv2.contourArea(cnt)
-            if area < 500:
+            if area < 800:
                 continue  # Filter small noise
 
             # 5. Circularity (Lesson 5 Shape Descriptor)

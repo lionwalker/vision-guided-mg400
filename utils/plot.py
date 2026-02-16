@@ -7,11 +7,11 @@ import os
 current_dir = os.path.dirname(__file__)
 # Go up one level to the project root, then into 'outputs'
 OUTPUT_FOLDER = os.path.join(current_dir, "..", "outputs")
-image_path = os.path.join(OUTPUT_FOLDER, "camera_detection.jpg")
+image_path = os.path.join(OUTPUT_FOLDER, "camera_detection.png")
 
 img = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 
-_, th = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY_INV)
+_, th = cv2.threshold(img, 110, 255, cv2.THRESH_BINARY_INV)
 
 kernel = np.ones((5, 5), np.uint8)
 mask = cv2.morphologyEx(th, cv2.MORPH_OPEN, kernel)
